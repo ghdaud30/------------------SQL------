@@ -1,0 +1,54 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container bg-light mt-5 rounded">
+  <h1>Todo</h1>
+  <form action="/edit/{{ todo.id }}" method="post">
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label"
+        >Todo Title</label
+      >
+      <input
+        type="text"
+        value="{{ todo.title }}"
+        name="title"
+        class="form-control"
+        id="exampleFormControlInput1"
+        placeholder="Enter todo title"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlTextarea1" class="form-label"
+        >Todo Description</label
+      >
+      <textarea
+        class="form-control"
+        name="desc"
+        id="exampleFormControlTextarea1"
+        rows="3"
+      >
+{{ todo.desc }}</textarea
+      >
+    </div>
+
+    <div class="mb-3">
+      <label for="completed">Is your task done?</label>
+      <input
+        type="checkbox"
+        name="completed"
+        id="completed"
+        {%
+        if
+        todo.is_done
+        %}checked{%
+        endif
+        %}
+      />
+    </div>
+
+    <div class="">
+      <button type="submit" class="btn btn-primary mb-3">Submit</button>
+    </div>
+  </form>
+</div>
+
+{% endblock content %}

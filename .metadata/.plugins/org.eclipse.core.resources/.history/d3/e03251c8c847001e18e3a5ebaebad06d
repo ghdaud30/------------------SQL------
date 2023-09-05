@@ -1,0 +1,118 @@
+package pnu;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Sql1 {
+	
+	public static Connection dbConnect(String driver, String url, String user, String passwd){
+		try {
+			
+			Class.forName(driver);
+			Connection con = DriverManager.getConnection(url, user, passwd);
+			
+			System.out.println("Connection success");
+			
+			return con;
+			
+		}catch(Exception e){
+			System.out.println("Connection failure");
+		}
+		
+		return null;
+	}
+	
+	public static ResultSet dbQuery(Connection con, String str) {
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(str);
+			System.out.println("Query success");
+			
+			return rs;
+			
+		}catch(Exception e) {
+			System.out.println("Query failure");
+		}
+		return null;
+	}
+	
+	public static void dbShowData(ResultSet rs){
+		try {
+			System.out.println("");
+			
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int count = rsmd.getColumnCount();
+			
+			int arr[] = new int[count];
+			
+			
+			for(int i =1; i <= count; i++) {
+				arr[i-1] = rsmd.getColumnDisplaySize(i) > rsmd.getColumnName(i).length()
+						? rsmd.getColumnDisplaySize(i): rsmd.getColumnName(i).length() + 1;
+				
+				System.out.print(String.format("%-" + arr[i-1] + "s",  rsmd.getColumnName(i)));
+			}
+			System.out.println("");
+			System.out.println("");
+			
+			while(rs.next()) {
+				for(int i =1; i <= count; i++) {
+					System.out.print(String.format("%-" + arr[i-1] + "s", rs.getString(i)));
+				}
+				System.out.println("");
+			}
+			
+			
+		}catch(Exception e) {
+			System.out.println("Show failure");
+		}
+		
+	}
+	
+	public static void main(String[] args) throws SQLException {
+		
+		String driver = "com.mysql.cj.jdbc.Driver";
+		String url = "jdbc:mysql://10.125.121.222:3306/world";
+		String user = "scott";
+		String passwd = "tiger";
+		
+		 Scanner sc = new Scanner(System.in);
+
+	     System.out.print("Please write your SQL Query: ");
+	     String query = sc.next(); 
+		
+		String str = "select * from city limit 10";
+		
+		String str1 = "SELECT Name\r\n"
+				+ "FROM world.city\r\n"
+				+ "WHERE countrycode = 'kor'\r\n"
+				+ "AND Population >= 1000000;";
+		
+		String str2 = "SELECT Name , Population\r\n"
+				+ "FROM world.city\r\n"
+				+ "ORDER BY Population DESC";
+
+		String str3 = "SELECT Name, Population\r\n"
+				+ "FROM world.city\r\n"
+				+ "WHERE Population BETWEEN 1000000 AND 5000000\r\n"
+				+ "ORDER BY Population DESC;";
+		
+		
+		
+		Connection con =  dbConnect(driver,url,user,passwd);
+		ResultSet rs = dbQuery(con, query);
+		dbShowData(rs);
+		
+		
+		
+		rs.close();
+		con.close();
+	}
+
+}

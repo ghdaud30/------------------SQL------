@@ -1,0 +1,72 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container bg-light mt-5 rounded">
+  <h1>Todo</h1>
+  <form action="/" method="post">
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label"
+        >Todo Title</label
+      >
+      <input
+        type="text"
+        name="title"
+        class="form-control"
+        id="exampleFormControlInput1"
+        placeholder="Enter todo title"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlTextarea1" class="form-label"
+        >Todo Description</label
+      >
+      <textarea
+        class="form-control"
+        name="desc"
+        id="exampleFormControlTextarea1"
+        rows="3"
+      ></textarea>
+    </div>
+
+    <div class="">
+      <button type="submit" class="btn btn-primary mb-3">Submit</button>
+    </div>
+  </form>
+</div>
+
+<div class="container mt-3">
+  <h2>My TODOs</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Created At</th>
+        <th scope="col">Updated At</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    {% for todo in todos %}
+    <tr>
+      <th scope="row">{{ todo.id }}</th>
+      {% if todo.is_done %}
+
+      <td><s>{{ todo.title }}</s></td>
+      <td><s>{{ todo.desc }}</s></td>
+
+      {% else %}
+      <td>{{ todo.title }}</td>
+      <td>{{ todo.desc }}</td>
+
+      {% endif %}
+
+      <td>{{ todo.date_created }}</td>
+      <td>{{ todo.date_modified }}</td>
+      <td>
+        <a href="/edit/{{ todo.id }}" class="text-primary">Edit</a>
+        <a href="/delete/{{ todo.id }}" class="text-danger">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock content %}

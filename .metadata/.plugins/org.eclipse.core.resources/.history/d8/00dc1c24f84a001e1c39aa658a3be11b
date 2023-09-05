@@ -1,0 +1,44 @@
+package pnu;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.List
+
+
+public class StudyQuery {
+
+	public static void main(String[] args) throws SQLException {
+		
+		StudyQuery sq = new StudyQuery();
+		
+		// 데이터베이스 연결 (con)
+		Connection con = sq.getConnection();
+		// 질의 (결과 로서 배열을 받음)
+ 		List<String[]> list = sq.getQueryResult(con);
+		// 결과 출력
+		sq.printResult(list);
+		
+
+	}
+	private void printResult(List<String[]> list) {
+		
+	}
+	
+	
+	private List<String[]> getQueryResult(Connection con){
+		
+	}
+	
+	private Connection getConnection() throws ClassNotFoundException {
+		String driver = "com.mysql.cj.jdbc.Driver";
+		String url = "jdbc:mysql://localhost:3306/sqltest";
+		String user = "scott";
+		String passwd = "tiger";
+		
+		Class.forName(driver);
+		Connection con = DriverManager.getConnection(url,user,passwd);
+		
+		return con;
+	}
+}

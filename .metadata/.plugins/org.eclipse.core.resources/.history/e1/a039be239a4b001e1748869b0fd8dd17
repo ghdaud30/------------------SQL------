@@ -1,0 +1,83 @@
+package pnu;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.Statement;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+
+
+
+public class StudyQuery {
+
+	public static void main(String[] args) throws SQLException, ClassNotFoundException {
+		
+		StudyQuery sq = new StudyQuery();
+		
+		// 데이터베이스 연결 (con)
+		Connection con = sq.getConnection();
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.print("write your query: ");
+		String tablename = sc.next();
+		String str = "select * from " + tablename;
+		
+		// 질의 (결과 로서 배열을 받음)
+		List<List<String>> list = sq.getQueryResult(con , str, tablename);
+ 		//System.out.println(list);
+		// 결과 출력
+		sq.printResult(list);
+		
+
+	}
+	private void printResult(List<List<String>> list) {
+		for(List<String>row : list) {
+			System.out.println(row);
+		}
+		System.out.println("");
+	}
+	
+	
+	private List<List<String>> getQueryResult(Connection con, String str, String tablename) throws SQLException{
+		List<List<String>> result = new ArrayList<>();  // 2차원 배열
+		
+		try {
+			 PreparedStatement st = con.prepareStatement(str);
+	         ResultSet rs = st.executeQuery();
+	         ResultSetMetaData rsmd = rs.getMetaData();
+	         int count = rsmd.getColumnCount();
+
+	         while (rs.next()) {
+	        	List<String> arr = new ArrayList<>();
+				for(int i = 1; i <= count; i ++) {
+						arr.add(rs.getString(i));
+						System.out.println(arr.get(i));
+					}
+				result.add(arr);
+	            }
+	         
+	            return result;			
+		}catch (Exception e) {
+			e.getMessage();
+		}
+		return null;
+	}
+	
+	private Connection getConnection() throws ClassNotFoundException, SQLException {
+		String driver = "com.mysql.cj.jdbc.Driver";
+		String url = "jdbc:mysql://localhost:3306/sqltest";
+		String user = "scott";
+		String passwd = "tiger";
+		
+		Class.forName(driver);
+		Connection con = DriverManager.getConnection(url,user,passwd);
+		
+		return con;
+	}
+}

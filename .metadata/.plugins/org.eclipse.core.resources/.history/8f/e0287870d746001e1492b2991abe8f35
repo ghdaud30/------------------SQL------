@@ -1,0 +1,76 @@
+package 자료구조3장검색;
+
+//3장 - 1번 실습 과제 > 2번 실습: 스트링 객체의 정렬과 이진 탐색 > 3번 실습: 객체 정렬과 이진 탐색
+//comparator 구현 실습
+
+import java.util.Arrays;
+import java.util.Random;
+
+public class Test_실습3_4정수배열이진탐색 {
+	
+	static void inputData(int[] data) {
+		Random rd = new Random();
+		for(int i =0; i < data.length ; i ++) {
+			data[i] = rd.nextInt(100) +1;
+		}
+		
+	}
+	
+	static void showData(int[] data) {
+		System.out.println("data is");
+		for (int i =0; i < data.length; i++) {
+			System.out.println(data[i]);
+		}
+	}
+	
+	static void sortData(int[] data) {
+		Arrays.sort(data);
+	}
+	
+	static int linearSearch(int[] data, int key) {
+//		for() {
+//		
+//		}
+		
+		return key;
+		
+	}
+
+	static int binarySearch(int[] a, int key) {
+		int pl = 0;
+		int pr = a.length - 1;
+		do {
+			int pc = pr / 2;
+			if (a[pc] == key) return pc;
+		}
+	
+	}
+	
+	public static void main(String[] args) {
+		int []data = new int[10];
+		
+		inputData(data);
+		showData(data);
+		
+		//Arrays.sort(data);
+		sortData(data);
+		showData(data);
+		System.out.println();
+		
+//		for (int num: data) {
+//			System.out.print(num+" ");
+//		}
+//		int key = 33;
+//		int result = linearSearch(data, key);
+//		System.out.println("\nlinearSearch(): result = " + result);
+//
+//		key = 39;
+//		result = binarySearch(data, key);
+//		System.out.println("\nbinarySearch(): result = " + result);
+//		int idx = Arrays.binarySearch(data, key);
+//		//Arrays.binarySearch(data,key);
+//		System.out.println("\nArrays.binarySearch(): result = " + result);
+
+	}
+
+}

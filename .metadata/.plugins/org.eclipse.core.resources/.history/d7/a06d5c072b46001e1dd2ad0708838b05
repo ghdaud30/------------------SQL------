@@ -1,0 +1,49 @@
+package pnu;
+
+import java.sql.*;
+
+
+public class exam2 {
+	public static void main(String[] args) {
+		Connection con = null;
+		
+		try {
+			String driver = "com.mysql.cj.jdbc.Driver";
+			String url = "jdbc:mysql://localhost:3306/world";
+			String username = "scott";
+			String password = "tiger";
+			
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,username,password);
+			
+			
+			
+			String str = "select city.Name, population from city, country , countrylanguage where city.Countrycode = \"KOR\" "
+					+ "order by population DESC "
+					+ "limit 10";
+			String del = "\t";
+			
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(str);
+			
+			showData(con, str);
+					
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public static void showData(Connection con, String str) throws Exception {
+		Statement st = con.createStatement();
+		ResultSet rs = st.executeQuery(str);
+		
+		while(rs.next()) {
+			System.out.print(String.format("%-10s", rs.getString("Name") ));
+			System.out.print(String.format("%-10d", rs.getInt("population") ));
+			System.out.println("");
+		}
+		
+		rs.close();
+		st.close();
+	}
+}

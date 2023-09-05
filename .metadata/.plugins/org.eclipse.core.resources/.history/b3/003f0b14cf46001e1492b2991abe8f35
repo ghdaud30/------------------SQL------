@@ -1,0 +1,10 @@
+package 자료구조3장검색;
+
+public class Test_실습3_4정수배열이진탐색 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

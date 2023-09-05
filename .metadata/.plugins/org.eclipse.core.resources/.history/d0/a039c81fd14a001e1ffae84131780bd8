@@ -1,0 +1,10 @@
+package pnu;
+
+public class Sql1_prestatement1 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
