@@ -9,6 +9,10 @@ import java.util.List;
 */
 import java.util.Random;
 import java.util.Scanner;
+
+import 자료구조4장스택과큐.IntStack.EmptyIntStackException;
+import 자료구조4장스택과큐.IntStack.OverflowIntStackException;
+
 class Point2 {
 	private int ix;
 	private int iy;
@@ -38,6 +42,7 @@ class Point2 {
 	public void setY(int y) {
 		iy = y;
 	}
+	
 	@Override
 	public boolean equals(Object p) {
 		if ((this.ix == ((Point2)p).ix) && (this.iy == ((Point2)p).iy))
@@ -69,22 +74,44 @@ class objectStack{
 //--- 생성자(constructor) ---//
 	public objectStack(int capacity) {
 		//구현
+		top = 0;
+		this.capacity = capacity;
+		
+		try {
+			data = new ArrayList<>(capacity);
+		}catch(OutOfMemoryError e) {
+			capacity = 0;
+		}
 	}
 
 //--- 스택에 x를 푸시 ---//
 	public boolean push(Point2 x) throws OverflowGenericStackException {
 		//구현
-
+		if(top >= capacity)
+			throw new OverflowGenericStackException();
+		data.add(x);
+		top++;
+		
+		return true;
 	}
 
 //--- 스택에서 데이터를 팝(정상에 있는 데이터를 꺼냄) ---//
 	public Point2 pop() throws EmptyGenericStackException  {
 		//구현
+		if(top <= 0)
+			throw new EmptyGenericStackException();
+		top--;
+		
+		return data.get(top);
+		
 	}
 
 //--- 스택에서 데이터를 피크(peek, 정상에 있는 데이터를 들여다봄) ---//
 	public Point2 peek() throws EmptyGenericStackException  {
 		//구현
+		if(top <= 0)
+			throw new EmptyGenericStackException();
+		return data.get(top -1);
 	}
 
 //--- 스택을 비움 ---//
@@ -95,6 +122,11 @@ class objectStack{
 //--- 스택에서 x를 찾아 인덱스(없으면 –1)를 반환 ---//
 	public int indexOf(Point2 x) {
 		//구현
+		for(int i = top -1; i >= 0; i--) {
+			if(data.get(i) == x)
+				return i;
+		}
+		return -1;
 	}
 
 //--- 스택의 크기를 반환 ---//
@@ -120,6 +152,10 @@ class objectStack{
 //--- 스택 안의 모든 데이터를 바닥 → 꼭대기 순서로 출력 ---//
 	public void dump() {
 		//구현
+		for(int i = 0; i < top; i++) {
+			System.out.print(data.get(i) + " ");
+		}
+		System.out.println();
 	}
 }
 public class 실습4_2_1객체스택 {
@@ -130,6 +166,7 @@ public class 실습4_2_1객체스택 {
 		Random random = new Random();
 		int rndx = 0, rndy = 0;
 		Point2 p = null;
+		
 		while (true) {
 			System.out.println(); // 메뉴 구분을 위한 빈 행 추가
 			System.out.printf("현재 데이터 개수: %d / %d\n", s.size(), s.getCapacity());

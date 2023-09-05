@@ -96,6 +96,14 @@ class IntStack {
 //--- 스택 안의 모든 데이터를 바닥 → 정상 순서로 표시 ---//
 	public void dump() {
 		//구현
+		if (ptr <= 0)
+			System.out.println("The Stack is empty");
+		else {
+			for(int i = 0; i < ptr; i ++) {
+				System.out.print(stk[i] + " ");
+			System.out.println();
+			}
+		}
 	}
 }
 
@@ -111,12 +119,13 @@ public class 실습4_2정수스택 {
 			System.out.println(); // 메뉴 구분을 위한 빈 행 추가
 			System.out.printf("현재 데이터 개수: %d / %d\n", s.size(), s.getCapacity());
 			System.out.print("(1)push　(2)pop　(3)peek　(4)dump　(0)종료: ");
-
 			int menu = stdIn.nextInt();
+			
 			if (menu == 0)
 				break;
 
 			int x;
+			
 			switch (menu) {
 
 			case 1: // 푸시
