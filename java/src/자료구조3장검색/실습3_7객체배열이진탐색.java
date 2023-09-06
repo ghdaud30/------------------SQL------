@@ -118,8 +118,8 @@ public class 실습3_7객체배열이진탐색 {
 		sortData(arr, cc);
 		// showData(arr);
 
-		Comparator<Fruit3> cc_price2 = (a, b) -> a.getPrice() - b.getPrice();
-		Arrays.sort(arr, cc.price2);
+		//Comparator<Fruit3> cc_price2 = (a, b) -> a.getPrice() - b.getPrice();
+		//Arrays.sort(arr, cc.price2);
 		
 		Arrays.sort(arr, (a, b) -> a.getPrice() - b.getPrice()); // Fruit3에
 		//compareTo()가 있어도 람다식 우선 적용 

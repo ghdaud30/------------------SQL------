@@ -53,7 +53,7 @@ public class Test_실습3_6_0스트링배열이진탐색 {
 		result = binarySearch(data, key);
 		System.out.println("\nbinarySearch(): result = " + result);
 		int idx = Arrays.binarySearch(data, key);
-		System.out.println("\nArrays.binarySearch(): result = " + result);
+		System.out.println("\nArrays.binarySearch(): result = " + idx);
 
 	}
 

@@ -173,8 +173,11 @@ public class 실습4_2_1객체스택 {
 			System.out.print("(1)push　(2)pop　(3)peek　(4)dump　(0)종료: ");
 
 			int menu = stdIn.nextInt();
-			if (menu == 0)
+			if (menu == 0) {
+				System.out.println();
+				System.out.print("Stack이 종료 되었습니다!");
 				break;
+			}
 
 			switch (menu) {
 			case 1: // 푸시
@@ -199,6 +202,7 @@ public class 실습4_2_1객체스택 {
 				break;
 
 			case 3: // 피크
+				
 				try {
 					p = s.peek();
 					System.out.println("peek한 데이터는 " + p + "입니다.");
@@ -208,6 +212,7 @@ public class 실습4_2_1객체스택 {
 				break;
 
 			case 4: // 덤프
+				System.out.print("dump 한 데이터는 ");
 				s.dump();
 				break;
 			}
