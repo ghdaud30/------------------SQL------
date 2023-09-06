@@ -6,8 +6,10 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="executeUpdate"/>
+		<item key="selection" value=""/>
 		<list key="findhistory">
+			<item value="&#x09;String str = &quot;call nationLanguage02(?)&quot;;"/>
+			<item value="outof"/>
 			<item value="executeUpdate"/>
 			<item value="compareTo"/>
 			<item value="getString"/>
