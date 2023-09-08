@@ -6,8 +6,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value=""/>
+		<item key="selection" value="pop():: top"/>
 		<list key="findhistory">
+			<item value="pop():: top"/>
 			<item value="&#x09;String str = &quot;call nationLanguage02(?)&quot;;"/>
 			<item value="outof"/>
 			<item value="executeUpdate"/>
@@ -16,6 +17,7 @@
 			<item value="package com.ruby.java.ch10.collection;"/>
 		</list>
 		<list key="replacehistory">
+			<item value=""/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
