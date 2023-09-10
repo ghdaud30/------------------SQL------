@@ -11,32 +11,32 @@ package 자료구조5장재귀알고리즘;
 *  rook 2개/a, h, knight 2개/b, g, bishop 2개/c, f, queen 1개/black queen은 black 칸에, 폰 8개
 */
 
-class Point {
-	private int ix;
-	private int iy;
+class Point2 {
+	private String ix;
+	private String iy;
 
-	public Point(int x, int y) {
+	public Point2(String x, String y) {
 		ix = x;
 		iy = y;
 	}
 
-	public int getX() {
+	public String getX() {
 		return ix;
 	}
 
-	public int getY() {
+	public String getY() {
 		return iy;
 	}
-	public void setX(int x) {
+	public void setX(String x) {
 		ix = x;
 	}
 
-	public void setY(int y) {
+	public void setY(String y) {
 		iy = y;
 	}
 }
 
-class Stack3 {
+class Stack33 {
 	private Point[] data; // 스택용 객체 배열
 	private int capacity; // 스택의 크기
 	private int top; // 스택 포인터
@@ -54,7 +54,7 @@ class Stack3 {
 	}
 
 	// --- 생성자(constructor) ---//
-	public Stack3(int maxlen) {
+	public Stack33(int maxlen) {
 		top = 0;
 		capacity = maxlen;
 		try {
@@ -133,14 +133,14 @@ class Stack3 {
 	}
 }
 
-public class Chap5_Test_QueenEight_4회차 {
+public class Chap5_Test_QueenEight_4회차2 {
 
-	public static void SolveQueen(int[][] d , int num) {
+	public static void SolveQueen(String[][] d, int num) {
 		int count = 0;// count는 퀸의 갯수
 		int ix = 0, iy = 0;
-		Stack3 st = new Stack3(num);
+		Stack3 st = new Stack3(10);
 		Point p = new Point(ix, iy);
-		d[ix][iy] = 1; count++;
+		d[ix][iy] = "■"; count++;
 		
 		st.push(p);
 		
@@ -155,7 +155,7 @@ public class Chap5_Test_QueenEight_4회차 {
 					
 				if(CheckMove(d, ix, cy, count)) {
 					st.push(new Point(ix,cy)); 
-					d[ix][cy] = 1;
+					d[ix][cy] = "■";
 					count++;
 					break;
 				}else {
@@ -168,7 +168,7 @@ public class Chap5_Test_QueenEight_4회차 {
 				
 				if(!st.isEmpty()) {
 					Point p1 = st.pop();
-					d[p1.getX()][p1.getY()] = 0;
+					d[p1.getX()][p1.getY()] = "□";
 					ix--;
 					count--;
 					cy = p1.getY() + 1;
@@ -242,7 +242,7 @@ public class Chap5_Test_QueenEight_4회차 {
 }
 		
 
-	public static boolean checkRow(int[][] d, int crow) { // 행 체크
+	public static boolean checkRow(String[][] d, int crow) { // 행 체크
 		
 		if (crow < 0 || crow >= d.length) {
 	        // crow가 유효한 범위를 벗어나면 오류 처리
@@ -250,7 +250,7 @@ public class Chap5_Test_QueenEight_4회차 {
 	    }
 		
 		for(int i = 0; i < d[0].length ; i++) {
-			if(d[crow][i] == 1) {
+			if(d[crow][i] == "■") {
 				return false;
 			}
 		}
@@ -258,7 +258,7 @@ public class Chap5_Test_QueenEight_4회차 {
 		return true;
 	}
 
-	public static boolean checkCol(int[][] d, int ccol) { // 열 체크
+	public static boolean checkCol(String[][] d, int ccol) { // 열 체크
 
 		if (ccol < 0 || ccol >= d.length) {
 	        // crow가 유효한 범위를 벗어나면 오류 처리
@@ -266,18 +266,18 @@ public class Chap5_Test_QueenEight_4회차 {
 	    }
 		
 		for(int i = 0; i < d.length ; i++) {
-			if(d[i][ccol] == 1) {
+			if(d[i][ccol] == "■") {
 				return false;
 			}
 		}
 		return true;
 	}
 
-	public static boolean checkDiagSW(int[][] d, int cx, int cy) { //x++, y-- or x--, y++ where 0<= x,y <= 7 , 대각선 체크
+	public static boolean checkDiagSW(String[][] d, int cx, int cy) { //x++, y-- or x--, y++ where 0<= x,y <= 7 , 대각선 체크
 		
 		while (cx >= 0 && cy < d.length) {
 			
-	        if (d[cx][cy] == 1) {
+	        if (d[cx][cy] == "■") {
 	            return false;
 	        }
 	        
@@ -289,12 +289,12 @@ public class Chap5_Test_QueenEight_4회차 {
 		
 	}
 
-	public static boolean checkDiagSE(int[][] d, int cx, int cy) {//x++, y++ or x--, y-- , 대각선 체크
+	public static boolean checkDiagSE(String[][] d, int cx, int cy) {//x++, y++ or x--, y-- , 대각선 체크
 
 		
 		while (cx >= 0 && cy >= 0) {
 			
-	        if (d[cx][cy] == 1) {
+	        if (d[cx][cy] == "■") {
 	            return false;
 	        }
 	        
@@ -305,7 +305,7 @@ public class Chap5_Test_QueenEight_4회차 {
 		return true;
 	}
 	
-  public static boolean CheckMove(int[][]d, int x, int y,int count) { //(x,y)로 이동 가능한지를 check
+  public static boolean CheckMove(String[][]d, int x, int y,int count) { //(x,y)로 이동 가능한지를 check
 	  
 	  if(checkRow(d, x) && checkCol(d, y) 
 				&& checkDiagSW(d, x,y) 
@@ -316,7 +316,7 @@ public class Chap5_Test_QueenEight_4회차 {
 	  return false;
 
   }
-  public static Point NextMove(int[][]d, int row, int col) {//다음 row에 대하여 이동할 col을 조사
+  public static Point NextMove(String[][]d, int row, int col) {//다음 row에 대하여 이동할 col을 조사
 	  
 	    int nextRow = row + 1; // 다음 행
 	    int nextCol = 0; // 다음 열 (처음부터 시작)
@@ -333,19 +333,19 @@ public class Chap5_Test_QueenEight_4회차 {
   
 	public static void main(String[] args) {
 		int row = 8, col = 8;
-		int[][] data = new int[row][col];
+		String[][] data = new String[row][col];
 		int num = data.length;
 		
 		for (int i = 0; i < data.length; i++)
 			for (int j = 0; j < data[0].length; j++)
-				data[i][j] = 0;
+				data[i][j] = "□";
 		
 		SolveQueen(data, num);
 		
 		System.out.println("solved Array data");
 		System.out.println("");
 
-		for (int[] element : data) {
+		for (String[] element : data) {
 			for (int j = 0; j < data[0].length; j++) {
 				System.out.print(" " + element[j]);
 			}
