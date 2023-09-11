@@ -28,13 +28,11 @@
     <fullyQualifiedTypeName name="자료구조4장스택과큐.IntStack.OverflowIntStackException"/>
     <fullyQualifiedTypeName name="자료구조4장스택과큐.IntStack.EmptyIntStackException"/>
     <fullyQualifiedTypeName name="java.lang.Class"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="com.mysql.cj.xdevapi.Statement"/>
     <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
     <fullyQualifiedTypeName name="java.sql.ResultSetMetaData"/>
     <fullyQualifiedTypeName name="java.sql.Statement"/>
     <fullyQualifiedTypeName name="java.awt.Point"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="자료구조4장스택과큐.Point"/>
     <fullyQualifiedTypeName name="java.lang.OutOfMemoryError"/>
     <fullyQualifiedTypeName name="java.lang.Exception"/>
@@ -49,4 +47,6 @@
     <fullyQualifiedTypeName name="java.lang.System"/>
     <fullyQualifiedTypeName name="java.lang.ProcessHandle"/>
     <fullyQualifiedTypeName name="자료구조5장재귀알고리즘.Stack3"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
 </qualifiedTypeNameHistroy>

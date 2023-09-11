@@ -37,7 +37,7 @@ class Point2 {
 }
 
 class Stack33 {
-	private Point[] data; // 스택용 객체 배열
+	private Point2[] data; // 스택용 객체 배열
 	private int capacity; // 스택의 크기
 	private int top; // 스택 포인터
 
@@ -58,14 +58,14 @@ class Stack33 {
 		top = 0;
 		capacity = maxlen;
 		try {
-			data = new Point[capacity]; // 스택 본체용 배열을 생성
+			data = new Point2[capacity]; // 스택 본체용 배열을 생성
 		} catch (OutOfMemoryError e) { // 생성할 수 없음
 			capacity = 0;
 		}
 	}
 
 	// --- 스택에 x를 푸시 ---//
-	public void push(Point p) throws OverflowIntStackException {
+	public void push(Point2 p) throws OverflowIntStackException {
 		if (top >= capacity) // 스택이 가득 참
 			throw new OverflowIntStackException();
 		data[top++] = p;
@@ -73,7 +73,7 @@ class Stack33 {
 	}
 
 	// --- 스택에서 데이터를 팝(정상에 있는 데이터를 꺼냄) ---//
-	public Point pop() throws EmptyIntStackException {
+	public Point2 pop() throws EmptyIntStackException {
 		if (top <= 0) // 스택이 빔
 			throw new EmptyIntStackException();
 //		Point ip = data[--top];
@@ -82,7 +82,7 @@ class Stack33 {
 	}
 
 	// --- 스택에서 데이터를 피크(peek, 정상에 있는 데이터를 들여다봄) ---//
-	public Point peek() throws EmptyIntStackException {
+	public Point2 peek() throws EmptyIntStackException {
 		if (top <= 0) // 스택이 빔
 			throw new EmptyIntStackException();
 		return data[top - 1];
@@ -148,36 +148,34 @@ public class Chap5_Test_QueenEight_4회차2 {
 			
 		ix++;		int cy = 0;
 		
-		while (ix < d.length)
-		{
+		while (ix < d.length) {
 
 			while (cy < d[0].length) {
-					
-				if(CheckMove(d, ix, cy, count)) {
-					st.push(new Point(ix,cy)); 
+
+				if (CheckMove(d, ix, cy, count)) {
+					st.push(new Point(ix, cy));
 					d[ix][cy] = "■";
 					count++;
 					break;
-				}else {
+				} else {
 					cy++;
 				}
 
 			}
-			
+
 			if (cy == d[0].length) {
-				
-				if(!st.isEmpty()) {
+
+				if (!st.isEmpty()) {
 					Point p1 = st.pop();
 					d[p1.getX()][p1.getY()] = "□";
 					ix--;
 					count--;
 					cy = p1.getY() + 1;
 				}
-				
+
 			} else {
 				break;
 			}
-
 
 		}
 	}

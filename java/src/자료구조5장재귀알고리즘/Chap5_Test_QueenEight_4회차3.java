@@ -1,5 +1,7 @@
 package 자료구조5장재귀알고리즘;
 
+import java.util.ArrayList;
+import java.util.List;
 
 //https://www.geeksforgeeks.org/n-queen-problem-backtracking-3/?ref=lbp
 //N Queen problem / backtracking
@@ -12,11 +14,11 @@ package 자료구조5장재귀알고리즘;
 *  rook 2개/a, h, knight 2개/b, g, bishop 2개/c, f, queen 1개/black queen은 black 칸에, 폰 8개
 */
 
-class Point {
+class Point3 {
 	private int ix;
 	private int iy;
 
-	public Point(int x, int y) {
+	public Point3(int x, int y) {
 		ix = x;
 		iy = y;
 	}
@@ -37,8 +39,8 @@ class Point {
 	}
 }
 
-class Stack3 {
-	private Point[] data; // 스택용 객체 배열
+class Stack333 {
+	private Point3[] data; // 스택용 객체 배열
 	private int capacity; // 스택의 크기
 	private int top; // 스택 포인터
 
@@ -55,18 +57,18 @@ class Stack3 {
 	}
 
 	// --- 생성자(constructor) ---//
-	public Stack3(int maxlen) {
+	public Stack333(int maxlen) {
 		top = 0;
 		capacity = maxlen;
 		try {
-			data = new Point[capacity]; // 스택 본체용 배열을 생성
+			data = new Point3[capacity]; // 스택 본체용 배열을 생성
 		} catch (OutOfMemoryError e) { // 생성할 수 없음
 			capacity = 0;
 		}
 	}
 
 	// --- 스택에 x를 푸시 ---//
-	public void push(Point p) throws OverflowIntStackException {
+	public void push(Point3 p) throws OverflowIntStackException {
 		if (top >= capacity) // 스택이 가득 참
 			throw new OverflowIntStackException();
 		data[top++] = p;
@@ -74,7 +76,7 @@ class Stack3 {
 	}
 
 	// --- 스택에서 데이터를 팝(정상에 있는 데이터를 꺼냄) ---//
-	public Point pop() throws EmptyIntStackException {
+	public Point3 pop() throws EmptyIntStackException {
 		if (top <= 0) // 스택이 빔
 			throw new EmptyIntStackException();
 //		Point ip = data[--top];
@@ -83,7 +85,7 @@ class Stack3 {
 	}
 
 	// --- 스택에서 데이터를 피크(peek, 정상에 있는 데이터를 들여다봄) ---//
-	public Point peek() throws EmptyIntStackException {
+	public Point3 peek() throws EmptyIntStackException {
 		if (top <= 0) // 스택이 빔
 			throw new EmptyIntStackException();
 		return data[top - 1];
@@ -95,7 +97,7 @@ class Stack3 {
 	}
 
 	// --- 스택에서 x를 찾아 인덱스(벌견하지 못하면 –1)를 반환 ---//
-	public int indexOf(Point x) {
+	public int indexOf(Point3 x) {
 		for (int i = top - 1; i >= 0; i--) // 정상 쪽에서 선형검색
 			if (data[i].equals(x))
 				return i; // 검색 성공
@@ -134,27 +136,29 @@ class Stack3 {
 	}
 }
 
-public class Chap5_Test_QueenEight_4회차 {
+public class Chap5_Test_QueenEight_4회차3 {
 
 	public static void SolveQueen(int[][] d , int num) {
-
+        
 		int count = 0;// count는 퀸의 갯수
 		int ix = 0, iy = 0;
 		int tmp = 0;
-		Stack3 st = new Stack3(num);
-		Point p = new Point(ix, iy); // 초기 퀸의 좌표
+		Stack333 st = new Stack333(num);
+		Point3 p = new Point3(ix, iy); // 초기 퀸의 좌표
 		d[ix][iy] = 1; count++; //퀸의 개수 증가
 		
 		st.push(p); // 퀸의 위치를 스택에 삽입
 		
-		while (count < num) {
-			
+		while (true) {
 
-			
+			if (st.isEmpty() && ix == 8) {
+				break;
+			}
+
 			ix++; // 다음 행으로 변경
 			int cy = 0; // 열의 위치를 0으로 변경
 
-			while (ix < d.length) {  
+			while (ix < d.length) {
 
 				// 1번 방법
 //				while (cy < d[0].length) {
@@ -169,16 +173,16 @@ public class Chap5_Test_QueenEight_4회차 {
 //					}
 //
 //				}
-				
+
 				// 2번 방법 NextMove 이용
-				while(cy < d[0].length) {
+				while (cy < d[0].length) {
 					tmp = NextMove(d, ix, cy);
-					if(tmp != -1) {
-						st.push(new Point(ix, tmp));
+					if (tmp != -1) {
+						st.push(new Point3(ix, tmp));
 						d[ix][tmp] = 1;
 						count++;
 						break;
-					}else {
+					} else {
 						cy++;
 					}
 				}
@@ -186,24 +190,40 @@ public class Chap5_Test_QueenEight_4회차 {
 				if (cy == d[0].length) {
 
 					if (!st.isEmpty()) {
-						Point p1 = st.pop();
+						Point3 p1 = st.pop();
 						d[p1.getX()][p1.getY()] = 0; // 이전 좌표 퀸 빼기
 						ix--;
 						count--;
-						cy = p1.getY() + 1; // 팝한 위치의 다음 열으로 변경해서 
-						//다시 순환 할 수 있도록 만듬
+						cy = p1.getY() + 1; // 팝한 위치의 다음 열으로 변경해서
+						// 다시 순환 할 수 있도록 만듬
 					}
 
 				} else {
 					break;
 				}
-				
+
+				if (count == 8) {
+					Point3 p1 = st.pop();
+					d[p1.getX()][p1.getY()] = 0; // 이전 좌표 퀸 빼기
+					ix--;
+					count--;
+					cy = p1.getY() + 1; // 팝한 위치의 다음 열으로 변경해서
+					// 다시 순환 할 수 있도록 만듬
+					showQueen(d);
+				}
 			}
+
 		}
-		
+	}
+	public static void showQueen(int[][] data) {
+		for (int[] element : data) {
+			for (int j = 0; j < data[0].length; j++) {
+				System.out.print(" " + element[j]);
+			}
+			System.out.println();
+	}
 		
 }
-		
 
 	public static boolean checkRow(int[][] d, int crow) { // 행 체크
 		
@@ -294,7 +314,8 @@ public class Chap5_Test_QueenEight_4회차 {
   
   
 	public static void main(String[] args) {
-		int row = 8, col = 8;
+		
+		int row = 4, col = 4;
 		int[][] data = new int[row][col];
 		int num = data.length;
 		
@@ -304,17 +325,15 @@ public class Chap5_Test_QueenEight_4회차 {
 		
 		SolveQueen(data, num);
 		
-		System.out.println("solved Array data");
-		System.out.println("");
-
-		for (int[] element : data) {
-			for (int j = 0; j < data[0].length; j++) {
-				System.out.print(" " + element[j]);
-			}
-			System.out.println();
-		}
+//		System.out.println("solved Array data");
+//		System.out.println("");
+//
+//		for (int[] element : data) {
+//			for (int j = 0; j < data[0].length; j++) {
+//				System.out.print(" " + element[j]);
+//			}
+//			System.out.println();
+//		}
 	}
 }
-
-
 
