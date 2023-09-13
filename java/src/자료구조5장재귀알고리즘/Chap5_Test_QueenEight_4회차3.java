@@ -159,58 +159,32 @@ public class Chap5_Test_QueenEight_4회차3 {
 			int cy = 0; // 열의 위치를 0으로 변경
 
 			while (ix < d.length) {
-
-				// 1번 방법
-//				while (cy < d[0].length) {
-//
-//					if (CheckMove(d, ix, cy)) {
-//						st.push(new Point(ix, cy));
-//						d[ix][cy] = 1;
-//						count++;
-//						break;
-//					} else {
-//						cy++;
-//					}
-//
-//				}
-
-				// 2번 방법 NextMove 이용
-				while (cy < d[0].length) {
 					tmp = NextMove(d, ix, cy);
 					if (tmp != -1) {
 						st.push(new Point3(ix, tmp));
 						d[ix][tmp] = 1;
 						count++;
 						break;
-					} else {
-						cy++;
-					}
-				}
-
-				if (cy == d[0].length) {
-
-					if (!st.isEmpty()) {
+					}else {
 						Point3 p1 = st.pop();
-						d[p1.getX()][p1.getY()] = 0; // 이전 좌표 퀸 빼기
-						ix--;
+						ix = p1.getX();
+						iy = p1.getY(); 
+						d[ix][iy] = 0;// 이전 좌표 퀸 빼기
 						count--;
-						cy = p1.getY() + 1; // 팝한 위치의 다음 열으로 변경해서
-						// 다시 순환 할 수 있도록 만듬
+						cy = iy + 1; // 팝한 위치의 다음 열으로 변경해서
+						continue;
 					}
-
-				} else {
-					break;
-				}
-
-				if (count == 8) {
-					Point3 p1 = st.pop();
-					d[p1.getX()][p1.getY()] = 0; // 이전 좌표 퀸 빼기
-					ix--;
-					count--;
-					cy = p1.getY() + 1; // 팝한 위치의 다음 열으로 변경해서
-					// 다시 순환 할 수 있도록 만듬
-					showQueen(d);
-				}
+			
+			}
+			
+			if (count == 8) {
+				Point3 p1 = st.pop();
+				d[p1.getX()][p1.getY()] = 0; // 이전 좌표 퀸 빼기
+				ix--;
+				count--;
+				cy = p1.getY() + 1; // 팝한 위치의 다음 열으로 변경해서
+				// 다시 순환 할 수 있도록 만듬
+				showQueen(d);
 			}
 
 		}
