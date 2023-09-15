@@ -140,13 +140,13 @@ class Offsets {
 			
 			while (!st.isEmpty()) // stack not empty
 			{	
-				
 				Items3 tmp = st.pop(); 		//unstack
 				int x = tmp.x;
 				int y = tmp.y;
 				int dir = 0;
-				System.out.println(tmp);
-				System.out.println(x);
+				
+//				System.out.println(tmp);
+//				System.out.println(x);
 				if(x == ix && y == iy) {
 					mark[x][y] = 2;
 					System.out.println("path in maze ");
@@ -169,18 +169,18 @@ class Offsets {
 //					}
 					
 					if ((maze[g][h] == 0) && (mark[g][h] == 0)) { // new position
-						Items3 tmp2 = new Items3(g, h, dir);
-						st.push(tmp2);
-						mark[x][y] = 2;						
+						tmp = new Items3(g, h, dir);
+						st.push(tmp);
+						mark[x][y] = 2;
+						break;
 					} else {
 						if(mark[g][h] == 2){
-							Items3 tmp2 = new Items3(g, h, dir);
-							st.push(tmp2);
+							tmp = new Items3(g, h, dir);
+							st.push(tmp);
 						}
 						dir++;
 						continue;
 					}
-					break;
 				}
 			}
 			

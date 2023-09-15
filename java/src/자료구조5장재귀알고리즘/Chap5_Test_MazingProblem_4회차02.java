@@ -27,7 +27,8 @@ import java.util.List;
 				Items3 tmp = st.pop(); 		//unstack
 				int x = tmp.x;
 				int y = tmp.y;
-				int dir = tmp.dir;
+				int dir = 0;
+				
 				System.out.println(tmp);
 				System.out.println(x);
 //				if(x == ix && y == iy) {
@@ -45,24 +46,26 @@ import java.util.List;
 					
 					int g = x + moves[dir].a; int h = y + moves[dir].b;
 					
-//					if ((g == ix) && (h == iy)) { // reached exit	// output path
-//						System.out.println("path in maze");
-//						mark[g][h] = 2;
-//						break;
-//					}
+					if ((g == ix) && (h == iy)) { // reached exit	// output path
+						System.out.println("path in maze");
+						mark[g][h] = 2;
+						st.clear();
+						break;
+					}
 					
 					if ((maze[g][h] == 0) && (mark[g][h] == 0)) { // new position
-						Items3 tmp2 = new Items3(g, h, dir);
-						st.push(tmp2);
-						mark[x][y] = 2;						
-					} else{
-						Items3 tmp3 = new Items3(g, h, dir);
-						st.push(tmp3);
-					}
+						tmp = new Items3(g, h, dir);
+						st.push(tmp);
+						mark[x][y] = 2;
+						break;
+					} else {
+						if(mark[g][h] == 2){
+							tmp = new Items3(g, h, dir);
+							st.push(tmp);
+						}
 						dir++;
 						continue;
-		
-					break;
+					}
 				}
 			}
 			
