@@ -7,61 +7,71 @@ import java.util.Scanner;
 
 import org.w3c.dom.Node;
 
-class Node1 {
-	int data;
-	Node1 next;
-
-	public Node1(int element) {
-		data = element;
-		
-		next = null;
-	}
-}
 
 class LinkedList1 {
-	Node1 first;
 
+	class Node1 {
+		int data;
+		Node1 next;
+
+		public Node1(int element) {
+			data = element;
+			next = null;
+		}
+	}
+	
+	private Node1 first;
+	
 	public LinkedList1() {
 		first = null;
 	}
 
-	public int Delete(int element) // delete the element
-	{
-		return element;
-
-	}
-
-	public void Show() { // 전체 리스트를 순서대로 출력한다.
-
-	}
-
 	public void Add(int element) // 임의 값을 삽입할 때 리스트가 오름차순으로 정렬이 되도록 한다
-	{
+	{				
 		Node1 tmp = new Node1(element);
-		Node1 p = first, q = null;
+		Node1 ptr = first, pv = null; // pv 는 이전에 값
 		
-		while(p != null) {
-			if(p.data< element) {
-				q = p;
-				p = p.next;
+		while(ptr != null) {
+			if(ptr.data< element) {
+				pv = ptr;
+				ptr = ptr.next;
 			}
 			else {
-				tmp.next = p;
-				q.next = tmp;
+				tmp.next = ptr;
+				pv.next = tmp;
 			}
 		}
 		
 		first = tmp;
 	}
+	
+	public int Delete(int element) // delete the element
+	{
+		return element;
 
-	public boolean Search(int data) { // 전체 리스트를 순서대로 출력한다.
+	}
+	
+	public void Show() { // 전체 리스트를 순서대로 출력한다.
+		System.out.println("");
+		Node1 ptr = first;
+		
+		if(ptr == null) System.out.println("ptr is null");
+		while(ptr != null) {
+			System.out.println(ptr.data);
+			ptr = ptr.next;
+		}
+	}
+	
+	public boolean Search(int data) { // 주어진 데이터를 검색한다.
+		
 		return true;
 	}
 }
 
 class 정수연결리스트 {
+	
 	enum Menu {
-		Add("삽입"), Delete("삭제"), Show("인쇄"), Search("검색"), Exit("종료");
+		Add("삽입"), Delete("삭제"), Show("출력"), Search("검색"), Exit("종료");
 
 		private final String message; // 표시할 문자열
 
@@ -82,7 +92,7 @@ class 정수연결리스트 {
 	}
 
 	// --- 메뉴 선택 ---//
-	static Menu SelectMenu() {
+	static Menu SelectMenu() {      
 		Scanner sc = new Scanner(System.in);
 		int key;
 		do {
@@ -106,6 +116,8 @@ class 정수연결리스트 {
 		int data = 0;
 		System.out.println("inserted");
 		l.Show();
+		System.out.println("");
+		
 		do {
 			switch (menu = SelectMenu()) {
 			case Add: // 머리노드 삽입
