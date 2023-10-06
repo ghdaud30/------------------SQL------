@@ -1,4 +1,4 @@
-package Chap6_Sorting;
+package 자료구조6장정렬알고리즘;
 
 public class 실습6_12_1MergeSort정수 {
 

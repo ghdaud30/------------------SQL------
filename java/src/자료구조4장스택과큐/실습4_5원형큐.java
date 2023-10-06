@@ -116,7 +116,7 @@ public class 실습4_5원형큐 {
 		while(true) {
 			
 			cq.show();
-			System.out.println("1. Push   2. Pop   3. Clear   4. Print");
+			System.out.println("1. Push   2. Pop   3. Clear   4. Print	 5. Exit");
 			System.out.print("명령을 선택해주세요. => ");
 			pick = sc.nextInt();
 			
@@ -145,6 +145,7 @@ public class 실습4_5원형큐 {
 			
 			case 4: cq.print(); break;
 			
+			case 5: return;
 			default: continue;
 			}
 		}

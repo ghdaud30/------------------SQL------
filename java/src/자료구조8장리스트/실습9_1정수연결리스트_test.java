@@ -5,9 +5,6 @@ package 자료구조8장리스트;
 import java.util.Random;
 import java.util.Scanner;
 
-import org.w3c.dom.Node;
-
-
 class LinkedList1 {
 
 	class Node1 {
@@ -18,42 +15,88 @@ class LinkedList1 {
 			data = element;
 			next = null;
 		}
+		
+
 	}
 	
-	private Node1 first;
+	private Node1 head;
 	
 	public LinkedList1() {
-		first = null;
+		head = null;
 	}
 
 	public void Add(int element) // 임의 값을 삽입할 때 리스트가 오름차순으로 정렬이 되도록 한다
-	{				
+	{	
+		
 		Node1 tmp = new Node1(element);
-		Node1 ptr = first, pv = null; // pv 는 이전에 값
+		Node1 ptr = head, q = null; // q 는 이전에 값
+		
+		if(head == null) {
+			head = tmp;
+			return;
+		}
+		
+		if(head.data > element) {
+			tmp.next = head;
+			head = tmp;
+			return;
+		}
+		
 		
 		while(ptr != null) {
-			if(ptr.data< element) {
-				pv = ptr;
+			if(ptr.data < element) {
+				q = ptr;
 				ptr = ptr.next;
 			}
 			else {
+				q.next = tmp;
 				tmp.next = ptr;
-				pv.next = tmp;
+				return;
 			}
 		}
 		
-		first = tmp;
+		q.next = tmp;
+		
+		return;	
 	}
 	
-	public int Delete(int element) // delete the element
+	public int Delete(int element) // 데이터를 삭제 한다
 	{
-		return element;
+		
+		Node1 ptr = head, q = null;
+		
+		if(head == null) {System.out.println("head is null please "
+				+ "\n insert the data first");
+			return -1;
+		}
+		
+		if(head.data == element) {
+			ptr = head.next;
+			head = ptr;
+			return element;
+		}
+		
+		
+		while(ptr != null) {
 
+			if( element > ptr.data) {
+				q = ptr;
+				ptr = ptr.next;
+			}
+			else if (ptr.data == element) {
+				q.next = ptr.next;
+				return element;
+			}
+			else {
+				return -1;
+			}
+		}
+		return element;
 	}
 	
 	public void Show() { // 전체 리스트를 순서대로 출력한다.
 		System.out.println("");
-		Node1 ptr = first;
+		Node1 ptr = head;
 		
 		if(ptr == null) System.out.println("ptr is null");
 		while(ptr != null) {
@@ -64,7 +107,29 @@ class LinkedList1 {
 	
 	public boolean Search(int data) { // 주어진 데이터를 검색한다.
 		
-		return true;
+		Node1 ptr = head , q = null;
+		
+		if(head == null) {
+			System.out.println("head is null please "
+					+ "\n insert the data first");
+			return false;
+		}
+		
+		while(ptr != null) {
+			if(ptr.data == data) {
+				return true;
+			}
+			else if(ptr.data < data) {
+				q = ptr;
+				ptr = ptr.next;
+			}
+			else {
+				return false;
+			}
+				
+		}
+		
+		return false;
 	}
 }
 
@@ -131,16 +196,16 @@ class 정수연결리스트 {
 				int num = l.Delete(data);
 				System.out.println("삭제된 데이터는 " + num);
 				break;
-			case Show: // 꼬리 노드 삭제
+			case Show: // 노드 출력하기
 				l.Show();
 				break;
 			case Search: // 회원 번호 검색
 				int n = sc.nextInt();
 				boolean result = l.Search(n);
 				if (!result)
-					System.out.println("검색 값 = " + n + "데이터가 없습니다.");
+					System.out.println("검색 값 = " + n + " 데이터가 없습니다.");
 				else
-					System.out.println("검색 값 = " + n + "데이터가 존재합니다.");
+					System.out.println("검색 값 = " + n + " 데이터가 존재합니다.");
 				break;
 			case Exit: // 꼬리 노드 삭제
 				break;
@@ -148,3 +213,4 @@ class 정수연결리스트 {
 		} while (menu != Menu.Exit);
 	}
 }
+
