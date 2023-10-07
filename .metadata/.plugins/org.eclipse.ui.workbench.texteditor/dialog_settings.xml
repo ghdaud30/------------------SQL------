@@ -6,8 +6,10 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="show"/>
+		<item key="selection" value="already"/>
 		<list key="findhistory">
+			<item value="already"/>
+			<item value="there is already the same number"/>
 			<item value="show"/>
 			<item value="board"/>
 			<item value="pop():: top"/>

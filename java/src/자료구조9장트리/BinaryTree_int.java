@@ -20,6 +20,10 @@ class TreeNode {
 		data = x;
 		LeftChild = RightChild = null;
 	}
+	
+	public int toString(TreeNode t) {
+		return t.data;
+	}
 }
 
 class Tree {
@@ -34,6 +38,7 @@ class Tree {
 		if (current.RightChild != null)
 			while (temp.LeftChild != null)
 				temp = temp.LeftChild;
+		System.out.println(temp.toString(temp));
 		return temp;
 	}
 
@@ -118,12 +123,143 @@ class Tree {
 		return true;
 	}
 
+//	boolean nochild(TreeNode p , TreeNode q) {
+//		if(isLeafNode(p)) {
+//			if(q.RightChild == p) {
+//				q.RightChild = null;
+//				return true;
+//			}
+//			else {
+//				q.LeftChild = null;
+//				return true;
+//			}
+//		}
+//		
+//		return false;
+//	}
+	
+//	boolean onechild(TreeNode p, TreeNode q) {
+//		if(p.RightChild == null) {
+//			q.LeftChild = p.LeftChild;
+//			return true;
+//		}
+//		else if(p.LeftChild == null) {
+//			q.RightChild = p.RightChild;
+//			return true;
+//		}
+//		
+//		return false;
+//	}
+	
 	boolean delete(int num) {
+		TreeNode p = root;
+		TreeNode q = null;
 
+		if(root == null) return false; 
+		
 
+		while (p != null) {
+
+			if (num > p.data) {
+				q = p;
+				p = p.RightChild;
+			} 
+			else if (num < p.data) {
+				q = p;
+				p = p.LeftChild;
+			}
+			
+			else {
+				//자식 노드가 없는 경우
+				if(isLeafNode(p)) {
+					if(q.RightChild == p) {
+						q.RightChild = null;
+						p = null;
+						return true;
+					}
+					else {
+						q.LeftChild = null;
+						p = null;
+						return true;
+					}
+				}
+							
+				//자식 노드가 1개인 경우
+				if(p.RightChild == null) {
+					q.LeftChild = p.LeftChild;
+					p = null;
+					return true;
+				}
+				else if(p.LeftChild == null) {
+					q.RightChild = p.RightChild;
+					p = null;
+					return true;
+				}
+				
+				
+				//자식 노드가 2개인 경우
+				TreeNode temp = inorderSucc(p);
+				int temp_data = temp.data;
+//				TreeNode q_temp = search2(temp_data);
+//				if(q_temp.LeftChild == temp) {
+//					p.data = temp_data;
+//					q_temp.LeftChild = null;
+//				}
+//				else {
+//					p.data = temp_data;
+//					q_temp.RightChild = null;
+//					
+//				}
+				delete(temp_data);
+				p.data = temp_data;
+				return true;
+			}
+				
+		}
+		return false;
 	}
 
 	boolean search(int num) {
+		TreeNode p = root;
+		TreeNode q = null;
+		
+		if(root == null) return false;
+		
+		while(p != null) {
+			if(num > p.data) {
+				q = p;
+				p = p.RightChild;
+			}
+			else if(num < p.data) {
+				q = p;
+				p = p.LeftChild;
+			}
+			else {
+				return true;
+			}
+
+		}
+		return false;
+	}
+
+
+	TreeNode search2(int num) {
+		TreeNode p = root;
+		TreeNode q = null;
+
+		while (p != null) {
+			if (num > p.data) {
+				q = p;
+				p = p.RightChild;
+			} else if (num < p.data) {
+				q = p;
+				p = p.LeftChild;
+			} else {
+				return q;
+			}
+
+		}
+		return null;
 
 	}
 }
@@ -176,11 +312,36 @@ public class BinaryTree_int {
 			switch (menu = SelectMenu()) {
 			case Add: // 노드 삽입
 				System.out.println("The number of items = ");
-				count = stdIn.nextInt();
-				int[] input = new int[count];
-				for (int ix = 0; ix < count; ix++) {
-					input[ix] = rand.nextInt(4);
-				}
+//				count = stdIn.nextInt();
+//		        int[] input = new int[count];
+//		        int currentIndex = 0;
+//
+//		        while (currentIndex < count) {
+//		            int randomNumber = rand.nextInt(40); // 0부터 29까지의 랜덤 정수
+//		            boolean isDuplicate = false;
+//
+//		            // 중복 확인
+//		            for (int i = 0; i < currentIndex; i++) {
+//		                if (input[i] == randomNumber) {
+//		                    isDuplicate = true;
+//		                    break;
+//		                }
+//		            }
+//
+//		            // 중복이 아니면 배열에 추가
+//		            if (!isDuplicate) {
+//		                input[currentIndex] = randomNumber;
+//		                currentIndex++;
+//		            }
+//		        }
+				
+//				int[] input = new int[count];
+//				for (int ix = 0; ix < count; ix++) {
+//					input[ix] = rand.nextInt(30);
+//				}
+//				
+				int[] input = {3,6,15,8,7,9,23,21,24};
+				count = input.length;
 				for (int i = 0; i < count; i++) {
 					if (!t.insert(input[i]))
 						System.out.println("Insert Duplicated data");
@@ -206,7 +367,7 @@ public class BinaryTree_int {
 				num = stdIn.nextInt();
 				result = t.search(num);
 				if (result)
-					System.out.println(" 데이터 = " + num + "존재합니다.");
+					System.out.println(" 데이터 = " + num + " 존재합니다.");
 				else
 					System.out.println("해당 데이터가 없습니다.");
 				break;

@@ -11,6 +11,9 @@
 
 ## 실습 9장 트리
 - 정수 이진 트리 시도중
+1. add (o)
+2. search (o)
+3. delete (x)
 
 ## 실습환경
 - Eclipse
